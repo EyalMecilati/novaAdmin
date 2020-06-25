@@ -2,6 +2,8 @@
 
 namespace App\Nova;
 
+use App\Nova\Filters\Day;
+use App\Nova\Filters\DayTo;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\ID;
@@ -73,7 +75,10 @@ class Stats extends Resource
      */
     public function filters(Request $request)
     {
-        return [];
+        return [
+           new Day,
+           new DayTo
+        ];
     }
 
     /**
