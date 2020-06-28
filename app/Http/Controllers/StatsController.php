@@ -19,6 +19,7 @@ class StatsController extends Controller
         $response = $client->request('GET', 'http://api.rtbravo.com/api/statsv2?token=4eyrn7z923f75admnazufvucvskm3vpyqn4422zc&from=2020-04-21&to=2020-04-25&groupby=day:paid:sid&format=json');
         $data = json_decode($response->getBody()->getContents(),true);       
         $time_now = date("Y-m-d");
+        DB::table('stats')->delete();
         foreach($data as $item)
             {
                 DB::table('stats')->insert([
