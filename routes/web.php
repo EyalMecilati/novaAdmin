@@ -13,5 +13,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'StatsController@getStatsData')->name('getStats');
+Route::get('/', 'StatsController@getStatsData')->name('getStatsData');
 
