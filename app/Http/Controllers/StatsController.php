@@ -38,7 +38,7 @@ class StatsController extends Controller
                                             'updated_at' => date($time_now),
                                         ]);
             }
-            return view('nova');
+            return view('welcome');
             },
             function (RequestException $e) {
                
