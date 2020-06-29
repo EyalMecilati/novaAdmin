@@ -22,6 +22,7 @@ class StatsController extends Controller
             function (ResponseInterface $res) {
                 $data = json_decode($res->getBody()->getContents(),true);       
                 $time_now = date("Y-m-d");
+
             foreach (array_chunk($data, 1000) as $responseChunk)
             {
                 $insertableArray = [];
