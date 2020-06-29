@@ -14,6 +14,7 @@ class StatsController extends Controller
 
     public function getStatsData()
     {
+        DB::disableQueryLog();
         DB::table('stats')->delete();
         $client = new Client();
         $promise = $client->requestAsync('GET','http://api.rtbravo.com/api/statsv2?token=4eyrn7z923f75admnazufvucvskm3vpyqn4422zc&from=2020-04-21&to=2020-04-25&groupby=day:paid:sid&format=json');
@@ -21,19 +22,23 @@ class StatsController extends Controller
             function (ResponseInterface $res) {
                 $data = json_decode($res->getBody()->getContents(),true);       
                 $time_now = date("Y-m-d");
-                foreach($data as $item)
+            foreach (array_chunk($data, 1000) as $responseChunk)
             {
-                DB::table('stats')->insert([
-                                            'day'      => $item["day"],
-                                            'paid'     => $item["paid"],
-                                            'sid'      => $item["sid"],
-                                            'requests' => $item["requests"],
-                                            'bids'     => $item["bids"],
-                                            'wins'     => $item["wins"],
-                                            'cost'     => $item["cost"],
-                                            'created_at' => date($time_now),
-                                            'updated_at' => date($time_now),
-                                        ]);
+                $insertableArray = [];
+                foreach($responseChunk as $value) {
+                    $insertableArray[] = [
+                        'day'      => $value["day"],
+                        'paid'     => $value["paid"],
+                        'sid'      => $value["sid"],
+                        'requests' => $value["requests"],
+                        'bids'     => $value["bids"],
+                        'wins'     => $value["wins"],
+                        'cost'     => $value["cost"],
+                        'created_at' => date($time_now),
+                        'updated_at' => date($time_now),
+                    ];
+                }
+                DB::table('stats')->insert($insertableArray);
             }
             return view('welcome');
             },
