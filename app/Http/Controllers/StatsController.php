@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-// use App\Nova\Stats;
 use GuzzleHttp\Client;
-// use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-// use Illuminate\Support\Facades\Http;
 use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Exception\RequestException;
 
