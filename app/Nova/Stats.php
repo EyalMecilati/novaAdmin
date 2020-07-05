@@ -49,10 +49,10 @@ class Stats extends Resource
             Date::make(__('Day'), 'day'),
             Text::make('paid'),
             Text::make('sid'),
-            Number::make('requests'),
-            Number::make('bids'),
-            Number::make('wins')->min(0)->max(1000)->step(0.01),
-            Number::make('cost')->min(0)->max(1000)->step(0.01),
+            Number::make('requests')->sortable(),
+            Number::make('bids')->sortable(),
+            Number::make('wins')->min(0)->max(1000)->step(0.01)->sortable(),
+            Number::make('cost')->min(0)->max(1000)->step(0.01)->sortable(),
         ];
     }
 
