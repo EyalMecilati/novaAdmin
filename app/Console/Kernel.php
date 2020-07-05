@@ -1,15 +1,10 @@
 <?php
 
 namespace App\Console;
-
+use App\Console\Commands\callApi;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use GuzzleHttp\Client;
-use Illuminate\Support\Facades\DB;
-use Psr\Http\Message\ResponseInterface;
-use GuzzleHttp\Exception\RequestException;
 
-use function GuzzleHttp\json_decode;
 
 class Kernel extends ConsoleKernel
 {
@@ -19,8 +14,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        \App\Console\Commands\callApi::class
+        Commands\callApi::class,
     ];
+
 
     /**
      * Define the application's command schedule.

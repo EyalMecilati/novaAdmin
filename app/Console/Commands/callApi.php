@@ -2,11 +2,12 @@
 
 namespace App\Console\Commands;
 
+use Illuminate\Console\Command;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
-use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Psr\Http\Message\ResponseInterface;
+
 
 class callApi extends Command
 {
@@ -67,11 +68,10 @@ class callApi extends Command
                 }
                 DB::table('stats')->insert($insertableArray);
             }
-            return view('welcome');
             },
             function (RequestException $e) {
-                return view('welcome');
             }
         )->wait();
+        echo "update done";
     }
 }
