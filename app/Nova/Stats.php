@@ -64,7 +64,7 @@ class Stats extends Resource
      */
     public function cards(Request $request)
     {
-        return [new Metrics\StatsCharts];
+        return [new Metrics\StatsCharts,new Metrics\StatsChartsLine];
         
     }
 
